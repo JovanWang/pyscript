@@ -24,8 +24,8 @@ class SpiderMain(object):
         # 已完成的爬取数量
         page_index = -1
         page_count = 0
-        # while self.urls.has_new_url():
-        for _ in range(5):
+        while self.urls.has_new_url():
+        # for _ in range(5):
             time.sleep(2)
             # 设置进度条展示
             if page_index == -1:

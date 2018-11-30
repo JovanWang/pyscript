@@ -45,17 +45,19 @@ class HtmlParser(object):
             # image_html_cont = self.downloader.download_image(image_url)
             image_html = BeautifulSoup(image_html_cont, 'html.parser')
             images = image_html.find('div', class_='ImageModal').find('div', class_='content').find('div', class_='image-slider').findAll('img')
+            i = 0
             for image in images:
+                i+=1
                 image_src = image.get('src')
                 if not os.path.exists("tempimage"):
                     os.makedirs("tempimage")
                 if not os.path.exists("tempimage/" + res_data['title'][0:20]):
                     os.makedirs("tempimage/" + res_data['title'][0:20])
-                image_path =  "tempimage/" + res_data['title'][0:20] + "/" + image_src.split("/")[-1]
-                # print(image_path)
+                image_path =  "tempimage/" + res_data['title'][0:20] + "/" + str(i) + image_src.split("/")[-1]
+                print(image_path)
                 request.urlretrieve(image_src, image_path)
                 res_data['images_src'].append(image_path)
-        
+        print("新闻获取完毕！")
         return res_data
     # 解析出url的方法
     def parse_url(self, page_url, html_cont):
