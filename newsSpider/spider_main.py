@@ -24,9 +24,9 @@ class SpiderMain(object):
         # 已完成的爬取数量
         page_index = -1
         page_count = 0
-        while self.urls.has_new_url():
-        # for _ in range(10):
-            time.sleep(4)
+        # while self.urls.has_new_url():
+        for _ in range(5):
+            time.sleep(2)
             # 设置进度条展示
             if page_index == -1:
                 page_count = self.urls.get_new_length()
@@ -38,7 +38,8 @@ class SpiderMain(object):
                 html_cont = self.downloader.download(
                     new_url, 'apnews.com',overtime)
                 new_data = self.parser.parse(new_url, html_cont)
-                self.outputer.collect_data(new_data)
+                self.outputer.output_word(new_data)
+                # self.outputer.collect_data(new_data)
                 page_index = page_index + 1
                 self.urls.set_overtime_empty()
                 print ('已完成 %d / %d' % (page_index, page_count))
@@ -48,7 +49,7 @@ class SpiderMain(object):
                 # self.urls.add_bad_url(new_url)
                 print ('%s crawl failed' % (new_url))
 
-        self.outputer.output_html()
+        # self.outputer.output_html()
 
     def craw_url(self, root_url):
         try:

@@ -38,23 +38,23 @@ class HtmlDownloader(object):
             return None
         return response.read()
 
-    def download_image(self, url):
-        if url is None:
-            return None
+    # def download_image(self, url):
+    #     if url is None:
+    #         return None
         
-        user_agent = self.user_agent_que.get()
+    #     user_agent = self.user_agent_que.get()
 
-        headers = {
-            'User-Agent': user_agent
-        }
+    #     headers = {
+    #         'User-Agent': user_agent
+    #     }
 
-        req = urllib.request.Request(url, headers=headers)
-        response = urllib.request.urlopen(req, timeout=10)
+    #     req = urllib.request.Request(url, headers=headers)
+    #     response = urllib.request.urlopen(req, timeout=10)
 
-        self.user_agent_que.put(user_agent)
-        if response.getcode() != 200:
-            return None
-        return response.read()
+    #     self.user_agent_que.put(user_agent)
+    #     if response.getcode() != 200:
+    #         return None
+    #     return response.read()
 
     # 从启动网址中爬取url
     def download_url(self, url, page_index):
