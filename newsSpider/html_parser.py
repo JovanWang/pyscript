@@ -37,7 +37,7 @@ class HtmlParser(object):
             res_data['text'].append(text_node.get_text())
         if soup.find('div', class_='Content WireStory fluid-wrapper with-lead').find('a', class_='LeadFeature') != None:
             image_url = 'https://apnews.com' + soup.find('div', class_='Content WireStory fluid-wrapper with-lead').find('a', class_='LeadFeature')['href']
-            #设置浏览器打开url
+            #设置启动浏览器打开url
             browser = webdriver.Chrome()
             browser.get(image_url)
             image_html_cont =  browser.page_source

@@ -19,7 +19,7 @@ class SpiderMain(object):
         self.parser = html_parser.HtmlParser()
         self.outputer = html_outputer.HtmlOutputer()
         self.hundred_index = 0
-
+    # 对已存在于数组中的url进行爬取
     def craw(self):
         # 已完成的爬取数量
         page_index = -1
@@ -45,12 +45,12 @@ class SpiderMain(object):
                 print ('已完成 %d / %d' % (page_index, page_count))
 
             except:
-                # 存储没及时响应的url
+                # 回收没及时响应的url
                 # self.urls.add_bad_url(new_url)
                 print ('%s crawl failed' % (new_url))
 
         # self.outputer.output_html()
-
+    # 从初始url中添加爬取的url，并调用爬取函数
     def craw_url(self, root_url):
         try:
             html_cont = self.downloader.download_url(root_url ,1)
