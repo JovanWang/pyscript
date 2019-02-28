@@ -44,13 +44,17 @@ class HtmlParser(object):
             browser.quit()
             # image_html_cont = self.downloader.download_image(image_url)
             image_html = BeautifulSoup(image_html_cont, 'html.parser')
-            images = image_html.find('div', class_='ImageModal').find('div', class_='content').find('div', class_='image-slider').findAll('img')
+            images = image_html.find('div', class_='ImageModal').find('div', class_='content').find('div', class_='image-placeholder').findAll('img')
             i = 0
+            print(images)
             for image in images:
                 i+=1
                 image_src = image.get('src')
                 if not os.path.exists("tempimage"):
                     os.makedirs("tempimage")
+                image_name = ""
+                while len(res_data['title'])<20:
+                    res_data['title'] += '0'
                 if not os.path.exists("tempimage/" + res_data['title'][0:20]):
                     os.makedirs("tempimage/" + res_data['title'][0:20])
                 image_path =  "tempimage/" + res_data['title'][0:20] + "/" + str(i) + image_src.split("/")[-1]

@@ -23,30 +23,31 @@ class HtmlOutputer(object):
     def output_word(self, data):
         if data is None:
             return
-        # print(data)
         
         queryList = data['text']
         imageList = data['images_src']
         title = data['title']
         title_list = title.split('-',1)
         document = Document()
-        param = {
-            'from':'en',
-            'to':'zh',
-            'query':title_list[1],
-        }
-        title_ch = title_list[0] + "-" + self.downloader.baidu_transfer(param)
+        # param = {
+        #     'from':'en',
+        #     'to':'zh',
+        #     'query':title_list[1],
+        # }
+        print(title_list[1])
+        title_ch = title_list[0] + "-" + self.downloader.baidu_transfer(title_list[1])
         document.add_heading(title_ch, level=1)
         i = 0
+        print('开始翻译')
         for query in queryList:
             # time.sleep(1)
             i += 1
-            param = {
-                'from':'en',
-                'to':'zh',
-                'query':query,
-            }
-            result = self.downloader.baidu_transfer(param)
+            # param = {
+            #     'from':'en',
+            #     'to':'zh',
+            #     'query':query,
+            # }
+            result = self.downloader.baidu_transfer(query)
             p = document.add_paragraph(result)
             # print(result)
             if i % 3 == 0 and len(imageList) > 0:

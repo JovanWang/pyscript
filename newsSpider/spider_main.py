@@ -44,9 +44,10 @@ class SpiderMain(object):
                 self.urls.set_overtime_empty()
                 print ('已完成 %d / %d' % (page_index, page_count))
 
-            except:
+            except Exception as err:
                 # 回收没及时响应的url
                 # self.urls.add_bad_url(new_url)
+                print(err)
                 print ('%s crawl failed' % (new_url))
 
         # self.outputer.output_html()
